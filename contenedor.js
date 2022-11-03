@@ -100,9 +100,29 @@ class Contenedor{
         } catch (error) {
             
         }
-
-
         
+    }
+
+    async change(idChange, productChange){
+        try {
+            const productos = await this.getAll()
+            if (productos.some(el => el.id === idChange)) {
+
+                let index = productos.findIndex(el => el.id === idChange)
+                console.log(index)
+                productos[index].title = productChange.title
+                productos[index].price = productChange.price
+
+                const contenidoNuevo = JSON.stringify(productos, null, 2)
+                console.log(contenidoNuevo)
+                await fs.promises.writeFile(this.filename, contenidoNuevo)
+            } else {
+                console.log("No hay producto con ese Id")
+            }  
+            
+        } catch (error) {
+            
+        }
     }
 }
 
