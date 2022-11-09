@@ -3,7 +3,7 @@ const Contenedor = require("./contenedor.js")
 
 
 const app = express()
-const puerto = 8081
+const puerto = 8080
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())

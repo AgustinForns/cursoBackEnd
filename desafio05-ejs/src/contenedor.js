@@ -51,7 +51,7 @@ class Contenedor{
                 console.log(producto)
             } else {
                 producto = null
-                console.log("No existe producto con ese ID")
+                console.log(producto)
             }  
             return producto
         } catch (error) {
@@ -85,7 +85,7 @@ class Contenedor{
                 console.log(contenidoNuevo)
                 await fs.promises.writeFile(this.filename, contenidoNuevo)
             } else {
-                console.log("No hay producto con ese Id")
+                console.log(null)
             }  
         
         } catch (error) {
@@ -117,7 +117,7 @@ class Contenedor{
                 console.log(contenidoNuevo)
                 await fs.promises.writeFile(this.filename, contenidoNuevo)
             } else {
-                console.log("No hay producto con ese Id")
+                console.log(null)
             }  
             
         } catch (error) {

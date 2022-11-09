@@ -13,13 +13,16 @@ html
             div 
                 h2 Productos 
                 div 
+
+                if productos.length>0
                     ul 
                        each val in productos
                             div 
                                 p= val.title 
                                 p= val.price 
                                 img(src=val.url)
-                             
+                else 
+                    p No existen productos             
 
 
 
