@@ -130,16 +130,3 @@ module.exports = Contenedor
 
 const productos = new Contenedor("./productos.txt")
 
-const getData = async () =>{
-    /* const productosAll = await productos.getAll()*/
-    /* console.log(await productos.save({title:"Producto 1", price:1740})) */
-    /* console.log(await productos.save({title:"Producto 2", price:10})) */
-   /*  console.log(await productos.save({title:"Producto 3", price:40}))
-    console.log(await productos.save({title:"Producto 4", price:740})) */
-    /* console.log(await productos.getById(5)) */
-   /*  await productos.deleteById(2) */
-  /*   await productos.deleteAll() */
-}
-
-
-getData()

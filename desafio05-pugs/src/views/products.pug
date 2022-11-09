@@ -1,0 +1,35 @@
+html 
+    head 
+        title Formulario  
+    body
+       h2 Bienvenido
+       nav 
+            div
+                ul
+                    li
+                        a(href="/") Formulario
+                    li
+                        a(href="/productos") Productos 
+            div 
+                h2 Productos 
+                div 
+                    ul 
+                       each val in productos
+                            div 
+                                p= val.title 
+                                p= val.price 
+                                img(src=val.url)
+                             
+
+
+
+
+
+
+
+                    
+
+
+
+
+
