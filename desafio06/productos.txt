@@ -42,9 +42,15 @@
     "id": 7
   },
   {
-    "title": "nhgnhg",
-    "price": "782",
-    "url": "https://st2.depositphotos.com/1581702/6983/i/450/depositphotos_69839895-stock-photo-white-bed-sheets-and-pillows.jpg",
+    "title": "Articulo nuevo",
+    "price": "500",
+    "url": "https://st.depositphotos.com/1001496/1404/i/450/depositphotos_14047861-stock-photo-red-and-white-tablecloth.jpg",
     "id": 8
+  },
+  {
+    "title": "Articulo nuevo",
+    "price": "500",
+    "url": "https://st.depositphotos.com/1001496/1404/i/450/depositphotos_14047861-stock-photo-red-and-white-tablecloth.jpg",
+    "id": 9
   }
 ]

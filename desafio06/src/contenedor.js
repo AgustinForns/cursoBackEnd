@@ -9,7 +9,6 @@ class Contenedor{
     async save(producto){
         try {
             
-            /* const contenido = await fs.promises.readFile(this.filename,"utf-8") */
             const productos = await this.getAll()
             console.log(productos)
             let idAnterior
