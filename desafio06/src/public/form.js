@@ -8,7 +8,12 @@ productForm.addEventListener("submit", (event)=>{
     const product = {
         title: document.getElementById("title").value,
         price: document.getElementById("price").value,
-        url: document.getElementById("url").value
+        url: document.getElementById("url").value,
+        timestamp: Date.now(),
+        description: document.getElementById("description").value,
+        stock: document.getElementById("stock").value,
+
+
     }
     //enviar el producto por medio de socket
     socketClient.emit("newProduct", product)

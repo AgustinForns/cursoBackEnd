@@ -3,54 +3,63 @@
     "title": "Vaso de vidrio",
     "price": 1740,
     "id": 1,
-    "url": "https://st.depositphotos.com/2743147/3951/i/950/depositphotos_39510643-stock-photo-water-glasses.jpg"
+    "url": "https://st.depositphotos.com/2743147/3951/i/950/depositphotos_39510643-stock-photo-water-glasses.jpg",
+    "description": "Vaso ideal para reuniones infromales",
+    "stock": 50,
+    "timestamp": 11
   },
   {
     "title": "Taza de ceramica",
     "price": 140,
     "id": 2,
-    "url": "https://st.depositphotos.com/2894415/3492/i/450/depositphotos_34920583-stock-photo-brown-ceramic-coffee-cup-and.jpg"
+    "url": "https://st.depositphotos.com/2894415/3492/i/450/depositphotos_34920583-stock-photo-brown-ceramic-coffee-cup-and.jpg",
+    "description": "Uso diario e informal",
+    "stock": 12,
+    "timestamp": 156418489
   },
   {
     "title": "Plato de vidrio",
     "price": 40,
     "id": 3,
-    "url": "https://st2.depositphotos.com/1010050/11535/i/450/depositphotos_115354500-stock-photo-empty-brown-plate.jpg"
+    "url": "https://st2.depositphotos.com/1010050/11535/i/450/depositphotos_115354500-stock-photo-empty-brown-plate.jpg",
+    "description": "Uso diario e informal",
+    "stock": 15,
+    "timestamp": 49847989
   },
   {
     "title": "Almohadon de lana",
     "price": 740,
     "id": 4,
-    "url": "https://st3.depositphotos.com/4267217/12978/i/450/depositphotos_129787268-stock-photo-mockup-pillow-in-the-interior.jpg"
+    "url": "https://st3.depositphotos.com/4267217/12978/i/450/depositphotos_129787268-stock-photo-mockup-pillow-in-the-interior.jpg",
+    "description": "Comodidad al 100%",
+    "stock": 14,
+    "timestamp": 7849874
   },
   {
     "title": "Mantel blanco",
     "price": "465",
     "id": 5,
-    "url": "https://st.depositphotos.com/1765561/3052/i/450/depositphotos_30520997-stock-photo-tablecloth-on-table.jpg"
+    "url": "https://st.depositphotos.com/1765561/3052/i/450/depositphotos_30520997-stock-photo-tablecloth-on-table.jpg",
+    "description": "Mantel blanco de 1000x1000",
+    "stock": 15,
+    "timestamp": 489461469
   },
   {
     "id": 6,
     "title": "Pijama",
     "price": "1489",
-    "url": "https://st.depositphotos.com/2069323/2156/i/450/depositphotos_21562543-stock-photo-woman-sleeping-in-bed.jpg"
+    "url": "https://st.depositphotos.com/2069323/2156/i/450/depositphotos_21562543-stock-photo-woman-sleeping-in-bed.jpg",
+    "description": "Pijama color beggie ideal para estar en la casa",
+    "stock": 20,
+    "timestamp": 451498894
   },
   {
     "title": "Sabana Blanca",
     "price": "555",
     "url": "https://st2.depositphotos.com/1581702/6983/i/450/depositphotos_69839895-stock-photo-white-bed-sheets-and-pillows.jpg",
-    "id": 7
-  },
-  {
-    "title": "Articulo nuevo",
-    "price": "500",
-    "url": "https://st.depositphotos.com/1001496/1404/i/450/depositphotos_14047861-stock-photo-red-and-white-tablecloth.jpg",
-    "id": 8
-  },
-  {
-    "title": "Articulo nuevo",
-    "price": "500",
-    "url": "https://st.depositphotos.com/1001496/1404/i/450/depositphotos_14047861-stock-photo-red-and-white-tablecloth.jpg",
-    "id": 9
+    "id": 7,
+    "description": "Sabana blanca de 3000x5000",
+    "stock": 145,
+    "timestamp": 144965489
   }
 ]

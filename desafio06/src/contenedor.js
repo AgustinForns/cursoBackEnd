@@ -14,40 +14,43 @@ class Contenedor{
             let idAnterior
             let idNuevo
             let productoId
+            const timestamp = Date.now()
             
            if (productos.length > 0) {
                 /* const productos = JSON.parse(contenido) */ 
                 idAnterior = productos[productos.length-1].id
                 idNuevo = idAnterior + 1
-                productoId = {...producto, id: idNuevo}
+                productoId = {id: idNuevo, ...producto, timestamp: timestamp}
                 productos.push(productoId)
-                console.log(productos)
+            
                 await fs.promises.writeFile(this.filename, JSON.stringify(productos, null, 2))
 
             } else {
                 idNuevo = 1
-                productoId = {...producto, id: idNuevo}
-                console.log(productoId)
+                productoId = {...producto, id: idNuevo, timestamp: timestamp}
+               
                 await fs.promises.writeFile(this.filename, JSON.stringify([productoId], null, 2))
                 
 
             }
 
-            return idNuevo
+            return productoId
 
         } catch (error) {
             console.log("error")
         }
     }
 
+
     async getById(idGet){
         try {
-            /* const productos = JSON.parse(await fs.promises.readFile("./productos.txt")) */
             const productos = await this.getAll()
+            console.log(idGet)
             let producto
-            if (productos.some(el => el.id ===idGet)) {
+            console.log(productos.some(el => el.id ===idGet))
+            if (productos.some(el => el.id == idGet)) {
+               
                 producto = productos.find(el => el.id === idGet)
-                console.log(producto)
             } else {
                 producto = null
                 console.log("No existe producto con ese ID")
@@ -80,12 +83,14 @@ class Contenedor{
             const productos = await this.getAll()
             console.log(productos)
             if (productos.some(el => el.id === idDel)) {
-                const contenidoNuevo = JSON.stringify(productos.filter(el => el.id != idDel), null, 2)
+                const contenidoNuevo = productos.filter(el => el.id != idDel)
                 console.log(contenidoNuevo)
-                await fs.promises.writeFile(this.filename, contenidoNuevo)
+                await fs.promises.writeFile(this.filename,JSON.stringify(contenidoNuevo, null, 2))
+                return contenidoNuevo
             } else {
                 console.log("No hay producto con ese Id")
             }  
+
         
         } catch (error) {
             console.log("el archivo no puede ser leido")
@@ -95,7 +100,8 @@ class Contenedor{
     async deleteAll(){
         try {
             await fs.promises.writeFile(this.filename, JSON.stringify(null))
-            console.log(JSON.parse(await fs.promises.readFile(this.filename)))
+            return await this.getAll()
+            
         } catch (error) {
             
         }
@@ -111,10 +117,15 @@ class Contenedor{
                 console.log(index)
                 productos[index].title = productChange.title
                 productos[index].price = productChange.price
+                productos[index].url = productChange.url
+                productos[index].description = productChange.description
+                productos[index].stock = productChange.stock
+                productos[index].timestamp = Date.now()
 
                 const contenidoNuevo = JSON.stringify(productos, null, 2)
                 console.log(contenidoNuevo)
                 await fs.promises.writeFile(this.filename, contenidoNuevo)
+                return productos[index]
             } else {
                 console.log("No hay producto con ese Id")
             }  

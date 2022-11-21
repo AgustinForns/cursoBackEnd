@@ -1,8 +1,8 @@
 <div>
-    <h2>Prouductos</h2>
-    {{#if productos}}
+    <h2>Carro de compras</h2>
+    {{#if cartProducts}}
         <div class="d-flex flex-row flex-wrap justify-content-center">
-            {{#each productos}}     
+            {{#each cartProducts}}     
                 <div class="card m-2 d-flex align-items-center" style="width: 35rem; height: 25rem">
                     <img class="card-img-top" style="height: 15rem" src="{{this.url}}" alt="Card image cap">
                     <div class="card-body">
@@ -14,7 +14,7 @@
             {{/each}}
         </div>
     {{else}}
-        <p>No existen prouctos</p>
+        <p>No existen prouctos en el carro</p>
     {{/if}}
 </div>
 

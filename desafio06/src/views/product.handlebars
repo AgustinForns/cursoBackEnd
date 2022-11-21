@@ -1,0 +1,21 @@
+<div>
+    {{#if producto}}
+    <h2>Producto {{producto.id}}</h2>
+        <div class="d-flex flex-row flex-wrap justify-content-center">   
+                <div class="card m-2 d-flex align-items-center" style="width: 35rem; height: 25rem">
+                    <img class="card-img-top" style="height: 15rem" src="{{producto.url}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">{{producto.title}}</h5>
+                        <p class="card-text">Precio: {{producto.price}}</p>
+                    </div>
+                </div>
+        </div>
+    {{else}}
+        <p>No existe producto con ese ID</p>
+    {{/if}}
+</div>
+
+{{> importScripts}}
+
+<script src="/socket.io/socket.io.js"></script>
+  
