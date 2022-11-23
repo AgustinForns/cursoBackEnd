@@ -1,7 +1,9 @@
+const { Console } = require("console")
 const fs = require("fs")
+const { get } = require("http")
 const Contenedor = require("./contenedor.js")
 
-const contenedorProductos = new Contenedor("productos.txt")
+const contenedorProductos = new Contenedor("./src/files/productos.txt")
 
 class Cart{
     constructor(filename){
@@ -20,22 +22,36 @@ class Cart{
             
 
         } catch (error) {
-            return "El archivo no puede ser leido"
+            return error
         }
     }
 
     async getCartProducts(idCart){
-        const carts = await this.getCarts()
-        console.log(carts)
+        try {
+            const carts = await this.getCarts()
+            let productsCart = []
             if (carts.some(el => el.id ===idCart)) {
-
                 let index = carts.findIndex(el => el.id === idCart)
-                return carts[index].products
-               
+                const productsId = carts[index].products //[1,5,6]
+                /* productsId.forEach(async(productId) => {
+                    productsCart.push(await contenedorProductos.getById(productId))
+                    console.log(productsCart)
+                }); */
+                
+                await Promise.all(files.map(async (productoId) => {
+                    productsCart.push(await contenedorProductos.getById(productoId))
+                }));
+
+               console.log(productsCart)
+                return productsCart //[]
             } else {
-                producto = null
-                console.log("No existe cart con ese ID")
+                return null
             }  
+            
+        } catch (error) {
+            return error
+        }
+       
     }
 
     async createCart(){
@@ -50,7 +66,6 @@ class Cart{
                 idNuevo = idAnterior + 1
                 cartId = {id: idNuevo, products: [], timestamp: Date.now()}
                 carts.push(cartId)
-                console.log(carts)
                 await fs.promises.writeFile(this.filename, JSON.stringify(carts, null, 2))
 
             } else {
@@ -64,18 +79,18 @@ class Cart{
             return carts
 
         } catch (error) {
-            console.log("error")
+            return error
         }
     }
 
     async addToCart(idCart, idProduct){
         try {
-            const producto = await contenedorProductos.getById(idProduct)
+           
             const carts = await this.getCarts()
             if (carts.some(el => el.id ===idCart)) {
 
                 let index = carts.findIndex(el => el.id === idCart)
-                const nuevoProductos = [...((carts[index].products)), producto]
+                const nuevoProductos = [...((carts[index].products)), idProduct]
                 carts[index].products = nuevoProductos
                 const contenidoNuevo = JSON.stringify(carts, null, 2)
 
@@ -83,12 +98,12 @@ class Cart{
                 return carts
                 //verificar que producto exista
             } else {
-                producto = null
-                console.log("No existe cart con ese ID")
+                return null
+                
             }  
 
         } catch (error) {
-            
+            return error
         }
     }
 
@@ -97,7 +112,6 @@ class Cart{
         try {
             const carts = await this.getCarts()
             if (carts.some(el => el.id ===idCart)) {
-                console.log("ok")
                 const cartsNew = carts.filter((cart) => cart.id !== idCart)
                 const contenidoNuevo = JSON.stringify(cartsNew, null, 2)
                 await fs.promises.writeFile(this.filename, contenidoNuevo)
@@ -105,10 +119,10 @@ class Cart{
                 //verificar que producto exista
             } else {
                 producto = null
-                console.log("No existe cart con ese ID")
+               
             }  
         } catch (error) {
-            
+            return error
         }
     }
 
@@ -124,10 +138,10 @@ class Cart{
                 await fs.promises.writeFile(this.filename, JSON.stringify(carts, null, 2))
                 return carts[index]
             } else {
-                console.log("No existe cart con ese ID")
+                return null
             }  
         } catch (error) {
-            
+            return error
         }
     }
 
@@ -136,18 +150,4 @@ class Cart{
 }
 
 module.exports = Cart
-
-const carro = new Cart("cart.txt")
-
-const getData = async () =>{
-   /*  console.log(await carro.getCarts())
-    console.log(await carro.createCart()) */
-   /*  console.log(await carro.addToCart(1,1)) */
-   /*  console.log(await carro.deleteCart(2)) */
-   /* console.log(await carro.deleteCartProduct(1,2)) */
-   /* console.log(await carro.getCartProducts(1)) */
-   
-}
-
-getData()
 
