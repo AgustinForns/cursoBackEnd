@@ -28,24 +28,28 @@ class Cart{
 
     async getCartProducts(idCart){
         try {
-            const carts = await this.getCarts()
-            let productsCart = []
-            if (carts.some(el => el.id ===idCart)) {
-                let index = carts.findIndex(el => el.id === idCart)
-                const productsId = carts[index].products //[1,5,6]
-                /* productsId.forEach(async(productId) => {
-                    productsCart.push(await contenedorProductos.getById(productId))
-                    console.log(productsCart)
-                }); */
-                
-                await Promise.all(files.map(async (productoId) => {
-                    productsCart.push(await contenedorProductos.getById(productoId))
-                }));
+          
 
-               console.log(productsCart)
-                return productsCart //[]
+            const carts = await this.getCarts()
+            
+            if (carts.some(el => el.id ===idCart)) { 
+                let index = carts.findIndex(el => el.id === idCart)
+                let productsCart = []
+                const productsId = carts[index].products //[1,5,6]   
+
+                await Promise.all(productsId.map(async (productoId) => {
+                    productsCart.push(await contenedorProductos.getById(productoId))
+                    console.log(productsCart)
+                })); 
+
+
+                console.log(productsCart)
+                return productsCart
+
+             
+            
             } else {
-                return null
+                return "No existe el carrito"
             }  
             
         } catch (error) {
@@ -87,18 +91,25 @@ class Cart{
         try {
            
             const carts = await this.getCarts()
+            const products = await contenedorProductos.getAll()
             if (carts.some(el => el.id ===idCart)) {
 
-                let index = carts.findIndex(el => el.id === idCart)
-                const nuevoProductos = [...((carts[index].products)), idProduct]
-                carts[index].products = nuevoProductos
-                const contenidoNuevo = JSON.stringify(carts, null, 2)
+                if (products.some(el => el.id == idProduct)) {
+                    let index = carts.findIndex(el => el.id === idCart)
+                    //[1,4,6]   [1,4,6,2]
+                    const nuevoProductos = [...((carts[index].products)), idProduct]
+                    carts[index].products = nuevoProductos
+                    const contenidoNuevo = JSON.stringify(carts, null, 2)
 
-                await fs.promises.writeFile(this.filename, contenidoNuevo)
-                return carts
+                    await fs.promises.writeFile(this.filename, contenidoNuevo)
+                    return carts
+                } else {
+                    return "No existe el producto que quiere agregar"
+                }
+
                 //verificar que producto exista
             } else {
-                return null
+                return "No existe el carrito"
                 
             }  
 
@@ -118,7 +129,7 @@ class Cart{
                 return cartsNew
                 //verificar que producto exista
             } else {
-                producto = null
+                return "No existe el carrito"
                
             }  
         } catch (error) {
@@ -129,14 +140,25 @@ class Cart{
     async deleteCartProduct(idCart, idProduct){
         try {
             const carts = await this.getCarts()
+            
             if (carts.some(el => el.id ===idCart)) {
-               
-                let index = carts.findIndex(el => el.id === idCart)
-                let products = carts[index].products
-                const contenidoNuevo = products.filter((product)=> product.id !== idProduct)
-                carts[index].products = contenidoNuevo
-                await fs.promises.writeFile(this.filename, JSON.stringify(carts, null, 2))
-                return carts[index]
+               let index = carts.findIndex(el => el.id == idCart)
+            console.log(index)
+                
+                if ((carts[index].products).some(id => id == idProduct)) {
+                    
+                    let index = carts.findIndex(el => el.id === idCart)
+                    let products = carts[index].products
+                    const contenidoNuevo = products.filter((product)=> product !== idProduct)
+                    carts[index].products = contenidoNuevo
+                    await fs.promises.writeFile(this.filename, JSON.stringify(carts, null, 2))
+                    return carts[index]
+                } else {
+                    return "El producto que quieres eliminar no esta en el carrito"
+                }
+
+
+                
             } else {
                 return null
             }  

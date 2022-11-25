@@ -30,6 +30,8 @@ const verifAdmin = (req, res, next) =>{
         next()
     }
 }
+
+
 //-------------------PRODUCTOS
 
 routerProductos.get("/", async(req, res)=>{
