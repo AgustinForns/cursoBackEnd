@@ -2,6 +2,7 @@
   "name": "entregable",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,7 +15,9 @@
   "dependencies": {
     "express": "^4.17.3",
     "express-handlebars": "^6.0.5",
+    "firebase-admin": "^11.4.0",
     "knex": "^2.3.0",
+    "mongoose": "^6.8.0",
     "mysql": "^2.18.1",
     "socket.io": "^4.5.3",
     "sqlite3": "^5.1.2"

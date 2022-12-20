@@ -1,42 +1,44 @@
-const express = require('express');
-const Contenedor = require("../managers/contenedorProductos");
+import express from "express";
+import { checkAdminRole } from "../middlewares/checkRole.js";
+import { options } from "../config/databaseConfig.js";
 
-const router = express.Router();
 
-const productosApi = new Contenedor("productos.txt");
+import { ContenedorDaoProductos } from "../daos/index.js";
 
-router.get('/',async(req,res)=>{
-    const productos = await productosApi.getAll();
-    res.send(productos);
+//products manager
+// const productosApi = new ContenedorArchivo(options.fileSystem.pathProducts);
+// const productosApi = new ContenedorMysql(options.sqliteDB, "productos");
+const productosApi = ContenedorDaoProductos;
+
+// products router
+const productsRouter = express.Router();
+
+productsRouter.get('/', async (req, res) => {
+    const response = await productosApi.getAll()
+    res.json(response)
 })
 
-router.get('/:id',async(req,res)=>{
-    const productId = req.params.id;
-    const product = await productosApi.getById(parseInt(productId));
-    if(product){
-        return res.send(product)
-    } else{
-        return res.send({error : 'producto no encontrado'})
-    }
+productsRouter.get('/:id', async (req, res) => {
+    const productId = req.params.id
+    const response = await productosApi.getById(productId);
+    res.json(response);
 })
 
-router.post('/',async(req,res)=>{
-    const newProduct = req.body;
-    const result = await productosApi.save(newProduct);
-    res.send(result);
+productsRouter.post('/', checkAdminRole, async (req, res) => {
+    const response = await productosApi.save(req.body);
+    res.json(response)
 })
 
-router.put('/:id',async(req,res)=>{
-    const cambioObj = req.body;
-    const productId = req.params.id;
-    const result = await productosApi.updateById(parseInt(productId),cambioObj);
-    res.send(result);
+productsRouter.put('/:id', checkAdminRole, async (req, res) => {
+    const productId = req.params.id
+    const response = await productosApi.updateById(req.body, productId);
+    res.json(response);
 })
 
-router.delete('/:id',async(req,res)=>{
-    const productId = req.params.id;
-    const result = await productosApi.deleteById(parseInt(productId));
-    res.send(result);
+productsRouter.delete('/:id', checkAdminRole, async (req, res) => {
+    const productId = req.params.id
+    const response = await productosApi.deleteById(productId);
+    res.json(response);
 })
 
-module.exports = {productsRouter:router};
+export {productsRouter}
