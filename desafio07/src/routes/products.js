@@ -20,12 +20,14 @@ productsRouter.get('/', async (req, res) => {
 
 productsRouter.get('/:id', async (req, res) => {
     const productId = req.params.id
+    console.log(productId)
     const response = await productosApi.getById(productId);
     res.json(response);
 })
 
 productsRouter.post('/', checkAdminRole, async (req, res) => {
-    const response = await productosApi.save(req.body);
+    const data = req.body
+    const response = await productosApi.save(data);
     res.json(response)
 })
 
